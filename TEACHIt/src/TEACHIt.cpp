@@ -456,6 +456,10 @@ void setup() {
     display.clearDisplay();
     display.drawBitmap(0, 1,  bitmap_teachIt, 128, 64, WHITE);
     display.display();
+    display.setTextSize(1);
+    display.setTextColor(WHITE);
+    display.setCursor(0,0);
+    display.setRotation(0);
     delay(2000);
     manhattanC = 0;
     screwC = 0;
@@ -471,7 +475,7 @@ void loop() {
     if (onAndOffV == 0){
         position = myEnc.read() / 5;
             Serial.printf("%i", position);
-}
+
         if (position >= 5){
             position = 0;
             myEnc.write(0);
@@ -480,38 +484,93 @@ void loop() {
       position = 4;
       myEnc.write(20);
 }
-    if (position == 0){
-        display.clearDisplay();
-        display.drawBitmap(0, 1,  bitmap_screwDriver, 128, 64, WHITE);
-        display.display();
-        if (encButton.isPressed()){
-            onAndOffV = 1;
-            screwC = 1;
+    }
+        if (position == 0){
+            display.clearDisplay();
+            display.drawBitmap(0, 1,  bitmap_screwDriver, 128, 64, WHITE);
+            display.display();
+            if (encButton.isPressed()){
+                onAndOffV = 1;
+                screwC = 1;
+                position = 6;
+        }
+            if (screwC == 1){
+                display.setCursor(0,0);
+                display.clearDisplay();
+                display.printf("SCREWDRIVER WORKS");
+                display.display();
         }
 }
         if (position == 1){
             display.clearDisplay();
             display.drawBitmap(0, 1,  bitmap_classMarg, 128, 64, WHITE);
             display.display();
+            if (encButton.isPressed()){
+                onAndOffV = 1;
+                classMC = 1;
+                position = 6;
+        }
+            if (classMC == 1){
+                display.setCursor(0,0);
+                display.clearDisplay();
+                display.printf("CLASSIC MARGARITA WORKS");
+                display.display();
+        }
 }
     if (position == 2){
         display.clearDisplay();
         display.drawBitmap(0, 1,  bitmap_essMartini, 128, 64, WHITE);
         display.display();
+            if (encButton.isPressed()){
+                onAndOffV = 1;
+                essMarC = 1;
+                position = 6;
+        }
+            if (essMarC == 1){
+                display.setCursor(0,0);
+                display.clearDisplay();
+                display.printf("ESPRESSO MARTINI WORKS");
+                display.display();
+        }
 }
     if (position == 3){
         display.clearDisplay();
         display.drawBitmap(0, 1,  bitmap_manhattan, 128, 64, WHITE);
         display.display();
+            if (encButton.isPressed()){
+                onAndOffV = 1;
+                manhattanC = 1;
+                position = 6;
+        }
+            if (manhattanC == 1){
+                display.setCursor(0,0);
+                display.clearDisplay();
+                display.printf("MANHATTAN WORKS");
+                display.display();
+        }
 }
     if (position == 4){
         display.clearDisplay();
         display.drawBitmap(0, 1,  bitmap_negroni, 128, 64, WHITE);
         display.display();
+            if (encButton.isPressed()){
+                onAndOffV = 1;
+                negroniC = 1;
+                position = 6;
+        }
+            if (negroniC == 1){
+                display.setCursor(0,0);
+                display.clearDisplay();
+                display.printf("NEGRONI WORKS");
+                display.display();
+        }
 }
-    if (screwC == 1){
-        display.clearDisplay();
-        display.printf("THIS WORKS");
-        display.display();
+    if (button.isPressed()){
+        manhattanC = 0;
+        screwC = 0;
+        classMC = 0;
+        negroniC = 0;
+        essMarC = 0;
+        onAndOffV = 0;
     }
 }
