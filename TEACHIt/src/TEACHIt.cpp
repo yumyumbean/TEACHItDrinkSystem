@@ -493,7 +493,6 @@ void loop() {
     MQTT_connect();
     MQTT_ping();
     weight = myScale.get_units(SAMPLES) / 28.34952; // return weight in units set by set_scale ();
-    lWeight = weight;
     if (onAndOffC == 0){
         position = myEnc.read() / 5;
             Serial.printf("%i", position);
@@ -520,8 +519,9 @@ void loop() {
                 display.setCursor(0,0);
                 pubFeed.publish("ADD 2 OZ OF VODKA");
             if (lWeight != weight){
+                lWeight = weight;
                 display.clearDisplay();
-                display.printf("CURRENT OZ: \n%f", weight);
+                display.printf("CURRENT OZ: \n%f", lWeight);
                 display.display();
             }
         } //allows the user to create a screwdriver
