@@ -15,6 +15,7 @@
 #include "IoTTimer.h"
 #include "Button.h"
 #include "Encoder.h"
+#include "HX711.h"
 
 const unsigned char bitmap_teachIt[] PROGMEM = {
   0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
@@ -418,21 +419,37 @@ const unsigned char bitmap_classMarg[] PROGMEM = {
   0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00
 };
 
-Encoder myEnc(D8, D9);
-Button button(D19);
-Button encButton(D2);
+HX711 myScale (D15, D16); //pins for scale
+
+const int CALFACTOR = 218; // changing value changes get_units units (lb , g, ton , etc .)
+const int SAMPLES = 10; // number of data points averaged when using get_units or get_value
+
+
+Encoder myEnc(D8, D9); //pins for encoder
+Button button(D19); //reset button
+Button encButton(D2); //encoder/selection button
 const int OLED_RESET=-1;
-Adafruit_SSD1306 display(OLED_RESET);
-int position2(int encPos);
-const int rotdefault = 0;
+Adafruit_SSD1306 display(OLED_RESET); //enable OLED
+const int rotdefault = 0; //default rotation if necessary
+float weight, lWeight, rawData, calibration;
+int offset;
+unsigned int last, lastTime;
+float subValue,pubValue;
+void MQTT_connect();
+bool MQTT_ping();
+TCPClient TheClient; 
+Adafruit_MQTT_SPARK mqtt(&TheClient,AIO_SERVER,AIO_SERVERPORT,AIO_USERNAME,AIO_KEY); //connection for Adafruit (requires your own Credentials.h)
+
+Adafruit_MQTT_Publish pubFeed = Adafruit_MQTT_Publish(&mqtt, AIO_USERNAME "/feeds/NextIngredient");
+Adafruit_MQTT_Publish pubFeed2 = Adafruit_MQTT_Publish(&mqtt, AIO_USERNAME "/feeds/totalOz");
+
 int manhattanC;
 int screwC;
 int classMC;
 int negroniC;
 int essMarC;
 int position;
-int encFrFr;
-int onAndOffV;
+int onAndOffC; //ints ending in C are counters
 
 int fivSevTim = 5000;
 int twoSecTim = 2000;
@@ -452,27 +469,32 @@ void setup() {
   Serial.begin(9600);
   waitFor(Serial.isConnected,10000);
     display.begin(SSD1306_SWITCHCAPVCC, 0x3C);
-    display.display();
+    display.display(); //Adafruit splash screen cuz I couldn't get rid of it
     display.clearDisplay();
-    display.drawBitmap(0, 1,  bitmap_teachIt, 128, 64, WHITE);
+    display.drawBitmap(0, 1,  bitmap_teachIt, 128, 64, WHITE); //My own splash screen for the device
     display.display();
     display.setTextSize(1);
     display.setTextColor(WHITE);
     display.setCursor(0,0);
     display.setRotation(0);
+    myScale.tare (); // set the tare weight (or zero)
+    myScale.set_scale(CALFACTOR); // adjust when calibrating scale to desired units
     delay(2000);
+    onAndOffC = 0;
     manhattanC = 0;
     screwC = 0;
     classMC = 0;
     negroniC = 0;
-    essMarC = 0;
-    timerOne.startTimer(twoSecTim);
-    onAndOffV = 0;
+    essMarC = 0; //start all counters at 0
     display.clearDisplay();
 }
 
 void loop() {
-    if (onAndOffV == 0){
+    MQTT_connect();
+    MQTT_ping();
+    weight = myScale.get_units(SAMPLES) / 28.34952; // return weight in units set by set_scale ();
+    lWeight = weight;
+    if (onAndOffC == 0){
         position = myEnc.read() / 5;
             Serial.printf("%i", position);
 
@@ -483,30 +505,33 @@ void loop() {
     if (position < 0){
       position = 4;
       myEnc.write(20);
-}
+} //allows the user to control the drink selection menu
     }
         if (position == 0){
             display.clearDisplay();
             display.drawBitmap(0, 1,  bitmap_screwDriver, 128, 64, WHITE);
             display.display();
             if (encButton.isPressed()){
-                onAndOffV = 1;
+                onAndOffC = 1;
                 screwC = 1;
                 position = 6;
         }
             if (screwC == 1){
                 display.setCursor(0,0);
+                pubFeed.publish("ADD 2 OZ OF VODKA");
+            if (lWeight != weight){
                 display.clearDisplay();
-                display.printf("SCREWDRIVER WORKS");
+                display.printf("CURRENT OZ: \n%f", weight);
                 display.display();
-        }
+            }
+        } //allows the user to create a screwdriver
 }
         if (position == 1){
             display.clearDisplay();
             display.drawBitmap(0, 1,  bitmap_classMarg, 128, 64, WHITE);
             display.display();
             if (encButton.isPressed()){
-                onAndOffV = 1;
+                onAndOffC = 1;
                 classMC = 1;
                 position = 6;
         }
@@ -515,14 +540,14 @@ void loop() {
                 display.clearDisplay();
                 display.printf("CLASSIC MARGARITA WORKS");
                 display.display();
-        }
+        } //allows the user to create a classic margarita
 }
     if (position == 2){
         display.clearDisplay();
         display.drawBitmap(0, 1,  bitmap_essMartini, 128, 64, WHITE);
         display.display();
             if (encButton.isPressed()){
-                onAndOffV = 1;
+                onAndOffC = 1;
                 essMarC = 1;
                 position = 6;
         }
@@ -531,14 +556,14 @@ void loop() {
                 display.clearDisplay();
                 display.printf("ESPRESSO MARTINI WORKS");
                 display.display();
-        }
+        } //allows the user to create an esspresso martini
 }
     if (position == 3){
         display.clearDisplay();
         display.drawBitmap(0, 1,  bitmap_manhattan, 128, 64, WHITE);
         display.display();
             if (encButton.isPressed()){
-                onAndOffV = 1;
+                onAndOffC = 1;
                 manhattanC = 1;
                 position = 6;
         }
@@ -547,14 +572,14 @@ void loop() {
                 display.clearDisplay();
                 display.printf("MANHATTAN WORKS");
                 display.display();
-        }
+        } //allows the user to create a manhattan
 }
     if (position == 4){
         display.clearDisplay();
         display.drawBitmap(0, 1,  bitmap_negroni, 128, 64, WHITE);
         display.display();
             if (encButton.isPressed()){
-                onAndOffV = 1;
+                onAndOffC = 1;
                 negroniC = 1;
                 position = 6;
         }
@@ -563,7 +588,7 @@ void loop() {
                 display.clearDisplay();
                 display.printf("NEGRONI WORKS");
                 display.display();
-        }
+        } //allows the user to create a negroni
 }
     if (button.isPressed()){
         manhattanC = 0;
@@ -571,6 +596,40 @@ void loop() {
         classMC = 0;
         negroniC = 0;
         essMarC = 0;
-        onAndOffV = 0;
+        onAndOffC = 0;
     }
+}
+void MQTT_connect() {
+  int8_t ret;
+ 
+  // Return if already connected.
+  if (mqtt.connected()) {
+    return;
+  }
+ 
+  Serial.print("Connecting to MQTT... ");
+ 
+  while ((ret = mqtt.connect()) != 0) { // connect will return 0 for connected
+       Serial.printf("Error Code %s\n",mqtt.connectErrorString(ret));
+       Serial.printf("Retrying MQTT connection in 5 seconds...\n");
+       mqtt.disconnect();
+       delay(5000);  // wait 5 seconds and try again
+  }
+  Serial.printf("MQTT Connected!\n");
+}
+
+bool MQTT_ping() {
+  static unsigned int last;
+  bool pingStatus;
+
+  if ((millis()-last)>120000) {
+      Serial.printf("Pinging MQTT \n");
+      pingStatus = mqtt.ping();
+      if(!pingStatus) {
+        Serial.printf("Disconnecting \n");
+        mqtt.disconnect();
+      }
+      last = millis();
+  }
+  return pingStatus;
 }
