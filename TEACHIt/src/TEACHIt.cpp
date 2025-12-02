@@ -513,16 +513,15 @@ void loop() {
             if (encButton.isPressed()){
                 onAndOffC = 1;
                 screwC = 1;
-                position = 6;
         }
             if (screwC == 1){
                 display.setCursor(0,0);
                 pubFeed.publish("ADD 2 OZ OF VODKA");
             if (lWeight != weight){
-                lWeight = weight;
                 display.clearDisplay();
                 display.printf("CURRENT OZ: \n%f", lWeight);
                 display.display();
+                lWeight = weight;
             }
         } //allows the user to create a screwdriver
 }
