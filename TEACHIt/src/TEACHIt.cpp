@@ -419,19 +419,17 @@ const unsigned char bitmap_classMarg[] PROGMEM = {
 };
 
 Encoder myEnc(D8, D9);
-Button button(D2);
-Button encButton(D14);
+Button button(D19);
+Button encButton(D2);
 const int OLED_RESET=-1;
 Adafruit_SSD1306 display(OLED_RESET);
 int position2(int encPos);
 const int rotdefault = 0;
-int menuC;
 int manhattanC;
 int screwC;
 int classMC;
 int negroniC;
 int essMarC;
-int selectionC;
 int position;
 int encFrFr;
 int onAndOffV;
@@ -451,34 +449,45 @@ SYSTEM_MODE(AUTOMATIC);
 
 // setup() runs once, when the device is first turned on
 void setup() {
+  Serial.begin(9600);
+  waitFor(Serial.isConnected,10000);
     display.begin(SSD1306_SWITCHCAPVCC, 0x3C);
     display.display();
     display.clearDisplay();
     display.drawBitmap(0, 1,  bitmap_teachIt, 128, 64, WHITE);
     display.display();
     delay(2000);
-    menuC = 0;
+    manhattanC = 0;
+    screwC = 0;
+    classMC = 0;
+    negroniC = 0;
+    essMarC = 0;
     timerOne.startTimer(twoSecTim);
     onAndOffV = 0;
     display.clearDisplay();
 }
 
 void loop() {
-    if (onAndOffV = 0){
+    if (onAndOffV == 0){
         position = myEnc.read() / 5;
-    }
-        if (position >= 96){
+            Serial.printf("%i", position);
+}
+        if (position >= 5){
             position = 0;
             myEnc.write(0);
 }
     if (position < 0){
-      position = 95;
-      myEnc.write(95);
+      position = 4;
+      myEnc.write(20);
 }
     if (position == 0){
         display.clearDisplay();
         display.drawBitmap(0, 1,  bitmap_screwDriver, 128, 64, WHITE);
         display.display();
+        if (encButton.isPressed()){
+            onAndOffV = 1;
+            screwC = 1;
+        }
 }
         if (position == 1){
             display.clearDisplay();
@@ -500,4 +509,9 @@ void loop() {
         display.drawBitmap(0, 1,  bitmap_negroni, 128, 64, WHITE);
         display.display();
 }
+    if (screwC == 1){
+        display.clearDisplay();
+        display.printf("THIS WORKS");
+        display.display();
+    }
 }
