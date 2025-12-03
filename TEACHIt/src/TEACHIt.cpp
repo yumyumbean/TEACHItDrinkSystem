@@ -443,6 +443,7 @@ Adafruit_MQTT_SPARK mqtt(&TheClient,AIO_SERVER,AIO_SERVERPORT,AIO_USERNAME,AIO_K
 Adafruit_MQTT_Publish pubFeed = Adafruit_MQTT_Publish(&mqtt, AIO_USERNAME "/feeds/NextIngredient");
 Adafruit_MQTT_Publish pubFeed2 = Adafruit_MQTT_Publish(&mqtt, AIO_USERNAME "/feeds/totalOz");
 
+int drinkDevice;
 int manhattanC;
 int screwC;
 int classMC;
@@ -493,6 +494,8 @@ void loop() {
     MQTT_connect();
     MQTT_ping();
     weight = myScale.get_units(SAMPLES) / 28.34952; // return weight in units set by set_scale ();
+    switch(drinkDevice){
+        case 0:
     if (onAndOffC == 0){
         position = myEnc.read() / 5;
             Serial.printf("%i", position);
@@ -514,16 +517,6 @@ void loop() {
                 onAndOffC = 1;
                 screwC = 1;
         }
-            if (screwC == 1){
-                display.setCursor(0,0);
-                pubFeed.publish("ADD 2 OZ OF VODKA");
-            if (lWeight != weight){
-                display.clearDisplay();
-                display.printf("CURRENT OZ: \n%f", lWeight);
-                display.display();
-                lWeight = weight;
-            }
-        } //allows the user to create a screwdriver
 }
         if (position == 1){
             display.clearDisplay();
@@ -534,12 +527,7 @@ void loop() {
                 classMC = 1;
                 position = 6;
         }
-            if (classMC == 1){
-                display.setCursor(0,0);
-                display.clearDisplay();
-                display.printf("CLASSIC MARGARITA WORKS");
-                display.display();
-        } //allows the user to create a classic margarita
+
 }
     if (position == 2){
         display.clearDisplay();
@@ -550,12 +538,7 @@ void loop() {
                 essMarC = 1;
                 position = 6;
         }
-            if (essMarC == 1){
-                display.setCursor(0,0);
-                display.clearDisplay();
-                display.printf("ESPRESSO MARTINI WORKS");
-                display.display();
-        } //allows the user to create an esspresso martini
+
 }
     if (position == 3){
         display.clearDisplay();
@@ -566,12 +549,7 @@ void loop() {
                 manhattanC = 1;
                 position = 6;
         }
-            if (manhattanC == 1){
-                display.setCursor(0,0);
-                display.clearDisplay();
-                display.printf("MANHATTAN WORKS");
-                display.display();
-        } //allows the user to create a manhattan
+
 }
     if (position == 4){
         display.clearDisplay();
@@ -582,13 +560,12 @@ void loop() {
                 negroniC = 1;
                 position = 6;
         }
-            if (negroniC == 1){
-                display.setCursor(0,0);
-                display.clearDisplay();
-                display.printf("NEGRONI WORKS");
-                display.display();
-        } //allows the user to create a negroni
+
 }
+    break;
+
+    case 1:
+    
     if (button.isPressed()){
         manhattanC = 0;
         screwC = 0;
