@@ -421,7 +421,7 @@ const unsigned char bitmap_classMarg[] PROGMEM = {
 
 HX711 myScale (D15, D16); //pins for scale
 
-const int CALFACTOR = 218; // changing value changes get_units units (lb , g, ton , etc .)
+const int CALFACTOR = 1025; // changing value changes get_units units (lb , g, ton , etc .)
 const int SAMPLES = 10; // number of data points averaged when using get_units or get_value
 
 
@@ -431,7 +431,7 @@ Button encButton(D2); //encoder/selection button
 const int OLED_RESET=-1;
 Adafruit_SSD1306 display(OLED_RESET); //enable OLED
 const int rotdefault = 0; //default rotation if necessary
-float weight, lWeight, rawData, calibration;
+float weight, lWeight, lWeight2, rawData, calibration;
 int offset;
 unsigned int last, lastTime;
 float subValue,pubValue;
@@ -456,6 +456,8 @@ int fivSevTim = 5000;
 int twoSecTim = 2000;
 int oneSecTim = 1000;
 
+void selection(int drinkSelection);
+void resetButton();
 
 IoTTimer timerOne;
 IoTTimer timerTwo;
@@ -486,6 +488,7 @@ void setup() {
     screwC = 0;
     classMC = 0;
     negroniC = 0;
+    drinkDevice = 0;
     essMarC = 0; //start all counters at 0
     display.clearDisplay();
 }
@@ -496,25 +499,23 @@ void loop() {
     weight = myScale.get_units(SAMPLES) / 28.34952; // return weight in units set by set_scale ();
     switch(drinkDevice){
         case 0:
-    if (onAndOffC == 0){
         position = myEnc.read() / 5;
-            Serial.printf("%i", position);
+        Serial.printf("%i", position);
 
-        if (position >= 5){
-            position = 0;
-            myEnc.write(0);
+    if (position >= 5){
+        position = 0;
+        myEnc.write(0);
 }
     if (position < 0){
       position = 4;
       myEnc.write(20);
-} //allows the user to control the drink selection menu
-    }
+} //allows the user to control the drink selection menu, and resets the values for the encoder to loop the menu
         if (position == 0){
             display.clearDisplay();
             display.drawBitmap(0, 1,  bitmap_screwDriver, 128, 64, WHITE);
             display.display();
             if (encButton.isPressed()){
-                onAndOffC = 1;
+                selection(1);
                 screwC = 1;
         }
 }
@@ -523,9 +524,8 @@ void loop() {
             display.drawBitmap(0, 1,  bitmap_classMarg, 128, 64, WHITE);
             display.display();
             if (encButton.isPressed()){
-                onAndOffC = 1;
+                selection(2);
                 classMC = 1;
-                position = 6;
         }
 
 }
@@ -534,9 +534,8 @@ void loop() {
         display.drawBitmap(0, 1,  bitmap_essMartini, 128, 64, WHITE);
         display.display();
             if (encButton.isPressed()){
-                onAndOffC = 1;
+                selection(3);
                 essMarC = 1;
-                position = 6;
         }
 
 }
@@ -545,9 +544,8 @@ void loop() {
         display.drawBitmap(0, 1,  bitmap_manhattan, 128, 64, WHITE);
         display.display();
             if (encButton.isPressed()){
-                onAndOffC = 1;
+                selection(4);
                 manhattanC = 1;
-                position = 6;
         }
 
 }
@@ -556,23 +554,47 @@ void loop() {
         display.drawBitmap(0, 1,  bitmap_negroni, 128, 64, WHITE);
         display.display();
             if (encButton.isPressed()){
-                onAndOffC = 1;
+                selection(5);
                 negroniC = 1;
-                position = 6;
         }
 
 }
     break;
 
     case 1:
-    
-    if (button.isPressed()){
-        manhattanC = 0;
-        screwC = 0;
-        classMC = 0;
-        negroniC = 0;
-        essMarC = 0;
-        onAndOffC = 0;
+    resetButton();
+    if (screwC == 1){
+        display.setCursor(0,0);
+        if (lWeight != weight){
+            display.clearDisplay();
+            display.printf("ADD 2 OZ OF VODKA: \n%0.1f", lWeight);
+            display.display();
+            lWeight = weight;
+            if (lWeight >= 2.1){
+                myScale.tare ();
+                display.clearDisplay();
+                display.printf("STOP");
+                display.display();
+                display.setCursor(0,0);
+                display.clearDisplay();
+                display.printf("ADD 3 OZ OF ORANGE JUICE: \n%0.1f", lWeight2);
+                display.display();
+                lastTime = millis();
+                  }
+                  break;
+                if (lWeight2 >= 3.1){
+                    myScale.tare ();
+                    display.clearDisplay();
+                    display.printf("done! ENJOY.");
+                    display.display();
+                    timerOne.startTimer(oneSecTim);
+                    lWeight2 = weight;
+                    if (timerOne.isTimerReady()){
+                        selection(0);      
+                    }
+                }
+            }
+        }
     }
 }
 void MQTT_connect() {
@@ -608,4 +630,18 @@ bool MQTT_ping() {
       last = millis();
   }
   return pingStatus;
+}
+void selection(int drinkSelection){
+      drinkDevice = drinkSelection;
+}
+void resetButton(){
+    if (button.isPressed()){
+        manhattanC = 0;
+        screwC = 0;
+        classMC = 0;
+        negroniC = 0;
+        essMarC = 0;
+        onAndOffC = 0;
+        selection(0);
+    }
 }
