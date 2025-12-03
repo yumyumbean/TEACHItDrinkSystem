@@ -431,7 +431,7 @@ Button encButton(D2); //encoder/selection button
 const int OLED_RESET=-1;
 Adafruit_SSD1306 display(OLED_RESET); //enable OLED
 const int rotdefault = 0; //default rotation if necessary
-float weight, lWeight, lWeight2, rawData, calibration;
+float weight, currWeight, lasWeight, rawData, calibration;
 int offset;
 unsigned int last, lastTime;
 float subValue,pubValue;
@@ -450,6 +450,7 @@ int classMC;
 int negroniC;
 int essMarC;
 int position;
+float totalOz;
 int onAndOffC; //ints ending in C are counters
 
 int fivSevTim = 5000;
@@ -515,6 +516,7 @@ void loop() {
             display.drawBitmap(0, 1,  bitmap_screwDriver, 128, 64, WHITE);
             display.display();
             if (encButton.isPressed()){
+                myScale.tare (); // set the tare weight (or zero)
                 selection(1);
                 screwC = 1;
         }
@@ -524,6 +526,7 @@ void loop() {
             display.drawBitmap(0, 1,  bitmap_classMarg, 128, 64, WHITE);
             display.display();
             if (encButton.isPressed()){
+                myScale.tare (); // set the tare weight (or zero)
                 selection(2);
                 classMC = 1;
         }
@@ -534,6 +537,7 @@ void loop() {
         display.drawBitmap(0, 1,  bitmap_essMartini, 128, 64, WHITE);
         display.display();
             if (encButton.isPressed()){
+                myScale.tare (); // set the tare weight (or zero)
                 selection(3);
                 essMarC = 1;
         }
@@ -544,6 +548,7 @@ void loop() {
         display.drawBitmap(0, 1,  bitmap_manhattan, 128, 64, WHITE);
         display.display();
             if (encButton.isPressed()){
+                myScale.tare (); // set the tare weight (or zero)
                 selection(4);
                 manhattanC = 1;
         }
@@ -554,6 +559,7 @@ void loop() {
         display.drawBitmap(0, 1,  bitmap_negroni, 128, 64, WHITE);
         display.display();
             if (encButton.isPressed()){
+                myScale.tare (); // set the tare weight (or zero)
                 selection(5);
                 negroniC = 1;
         }
@@ -565,36 +571,50 @@ void loop() {
     resetButton();
     if (screwC == 1){
         display.setCursor(0,0);
-        if (lWeight != weight){
+        if (lasWeight != weight){
+            currWeight = weight;
+        }
             display.clearDisplay();
-            display.printf("ADD 2 OZ OF VODKA: \n%0.1f", lWeight);
+            display.printf("ADD 3 OZ OF ORANGE JUICE: \n%0.1f", currWeight);
             display.display();
-            lWeight = weight;
-            if (lWeight >= 2.1){
-                myScale.tare ();
+            if (currWeight >= 3.1){
+                lasWeight = currWeight;
                 display.clearDisplay();
                 display.printf("STOP");
                 display.display();
-                display.setCursor(0,0);
                 display.clearDisplay();
-                display.printf("ADD 3 OZ OF ORANGE JUICE: \n%0.1f", lWeight2);
+                display.printf("STOP");
                 display.display();
-                lastTime = millis();
-                  }
-                  break;
-                if (lWeight2 >= 3.1){
-                    myScale.tare ();
-                    display.clearDisplay();
-                    display.printf("done! ENJOY.");
-                    display.display();
-                    timerOne.startTimer(oneSecTim);
-                    lWeight2 = weight;
-                    if (timerOne.isTimerReady()){
-                        selection(0);      
-                    }
-                }
+                myScale.tare();
+                selection(3);
             }
+    }
+        break;
+
+        case 3:
+        if (lasWeight != weight){
+            currWeight = weight;
         }
+            display.setCursor(0,0);
+            display.clearDisplay();
+            display.printf("ADD 2 OZ OF VODKA: \n%0.1f", currWeight);
+            display.display();
+            if (currWeight >= 2.1){
+                selection(2);
+            }
+
+            break;
+
+                case 2:
+                myScale.tare ();
+                display.clearDisplay();
+                display.printf("done! ENJOY.");
+                display.display();
+                timerOne.startTimer(oneSecTim);
+                if (timerOne.isTimerReady()){
+                    selection(0);
+                }
+                    break;
     }
 }
 void MQTT_connect() {
