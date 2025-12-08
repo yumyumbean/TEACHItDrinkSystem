@@ -419,15 +419,82 @@ const unsigned char bitmap_classMarg[] PROGMEM = {
   0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00
 };
 
+const unsigned char bitmap_GAME[] PROGMEM = {
+  0xF7,0xFD,0xFF,0x7F,0xDF,0xF7,0xFD,0xFF,0x7F,0xDF,0xF7,0xFD,0xFF,0x7F,0xDF,0xFF,
+  0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,
+  0xFC,0x07,0x03,0xC0,0xF0,0x3C,0x0F,0x03,0xC0,0xF0,0x3C,0x0F,0x03,0xC0,0xF0,0x3F,
+  0xFC,0x07,0x03,0xC0,0xF0,0x3C,0x0F,0x03,0xC0,0xF0,0x3C,0x0F,0x03,0xC0,0xF0,0x3F,
+  0xFC,0x07,0x03,0xC0,0xF0,0x3C,0x0F,0x03,0xC0,0xF0,0x3C,0x0F,0x03,0xC0,0xF0,0x3F,
+  0xFC,0x07,0x03,0xC0,0xF0,0x3C,0x0F,0x03,0xC0,0xF0,0x3C,0x0F,0x03,0xC0,0xF0,0x3F,
+  0xFC,0x07,0x03,0xC0,0xF0,0x3C,0x0F,0x03,0xC0,0xF0,0x3C,0x0F,0x03,0xC0,0xF0,0x3F,
+  0xFC,0x07,0x03,0xC0,0xF0,0x3C,0x0F,0x03,0xC0,0xF0,0x3C,0x0F,0x03,0xC0,0xF0,0x3C,
+  0xFC,0x07,0x03,0xC0,0xF0,0x3C,0x0F,0x03,0xC0,0xF0,0x3C,0x0F,0x03,0xC0,0xF0,0x3C,
+  0xFC,0x07,0x03,0xC0,0xF0,0x3C,0x0F,0x03,0xC0,0xF0,0x3C,0x0F,0x03,0xC0,0xF0,0x3C,
+  0xFC,0x07,0x03,0xC0,0xF0,0x3C,0x0F,0x03,0xC0,0xF0,0x3C,0x0F,0x03,0xC0,0xF0,0x3C,
+  0x1C,0x07,0x03,0xC0,0xF0,0x3C,0x0F,0x03,0xC0,0xF0,0x3C,0x0F,0x03,0xC0,0xF0,0x3C,
+  0x1C,0x07,0x03,0xC0,0xF0,0x3C,0x0F,0x03,0xC0,0xF0,0x3C,0x0F,0x03,0xC0,0xF0,0x3C,
+  0x1F,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,
+  0x10,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x0F,
+  0x10,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x0F,
+  0x10,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x0F,
+  0xF0,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x0C,
+  0xF0,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x0C,
+  0xF0,0x00,0x00,0x60,0x00,0x0F,0xE0,0x60,0x00,0x30,0x30,0x00,0x00,0x80,0x00,0x0C,
+  0xF0,0x00,0x00,0xF8,0x00,0x3F,0xF9,0xC0,0x00,0xF8,0x7C,0x80,0x01,0xF8,0x00,0x0C,
+  0x10,0x00,0x01,0xFF,0xE0,0x7F,0xFF,0x80,0x03,0xFD,0xFF,0x80,0x33,0xFF,0x00,0x0C,
+  0x10,0x00,0x07,0xFF,0xE0,0xFC,0xFF,0x00,0x0F,0x3F,0x9F,0x00,0x7F,0xFF,0x00,0x0C,
+  0x10,0x00,0x0F,0x3F,0x81,0xE1,0x3F,0x00,0x1E,0x3E,0x8F,0x01,0xDF,0x7E,0x00,0x0F,
+  0x10,0x00,0x1F,0x07,0x01,0xCF,0xEF,0x00,0x3E,0x3C,0x8F,0x03,0xBF,0x1C,0x00,0x0F,
+  0x10,0x00,0x3F,0x0E,0x03,0x9F,0xCF,0x00,0x7C,0x3C,0x8F,0x03,0xFF,0x38,0x00,0x0F,
+  0x10,0x00,0x7F,0x1F,0x83,0x19,0x8F,0x00,0x74,0x3C,0x8F,0x07,0x7F,0x7E,0x00,0x0F,
+  0xF0,0x00,0xEF,0x7F,0xE3,0x11,0x8F,0x00,0x74,0x3C,0x8F,0x07,0x7F,0xFE,0x00,0x0C,
+  0xF0,0x01,0xCF,0xFF,0xF3,0x03,0x0F,0x00,0xF4,0x3C,0x8F,0x0E,0x7F,0xFC,0x00,0x0C,
+  0xF0,0x01,0xCF,0xC3,0xF1,0x86,0x0F,0x00,0xF7,0xFF,0xEF,0x0E,0x7F,0xFC,0x00,0x0C,
+  0xF0,0x03,0xCF,0x40,0xF1,0x8C,0x0F,0x01,0xF7,0xFF,0xCF,0x0E,0x7F,0x00,0x00,0x0C,
+  0x30,0x03,0xCF,0x40,0x78,0xCC,0x0F,0x07,0xF7,0xFF,0x8F,0x0E,0x7F,0x00,0x00,0x0C,
+  0x30,0x03,0xCF,0x60,0x70,0xFF,0xFF,0x0F,0xF4,0x3C,0x8F,0x0F,0x7B,0x00,0x00,0x0C,
+  0x30,0x03,0xCF,0x7F,0xF0,0x3F,0xFF,0x0C,0xF4,0x3C,0x8F,0x0F,0x7B,0x00,0x00,0x0F,
+  0x30,0x03,0xCF,0x5F,0x70,0x3F,0xFF,0x00,0x74,0x3C,0x8F,0x0F,0xF3,0x00,0x00,0x0F,
+  0x30,0x03,0xCE,0x4E,0x70,0x60,0x0F,0x80,0x74,0x3C,0x8F,0x0F,0xE3,0x00,0x00,0x0F,
+  0x30,0x03,0xFC,0x7F,0xE0,0xF0,0x0F,0x80,0x34,0x3C,0x8F,0x07,0xC3,0x03,0x80,0x0F,
+  0xF0,0x01,0xF8,0x60,0xC1,0xFC,0x1F,0x80,0x34,0x3C,0xEF,0x07,0xE3,0x07,0x00,0x08,
+  0xF0,0x01,0xF8,0x41,0x81,0xFF,0x3F,0xE0,0x34,0x7F,0xCF,0x43,0xFF,0x1E,0x00,0x08,
+  0xF0,0x00,0xFC,0x47,0x03,0x7F,0xE7,0xE0,0x7C,0x7F,0x8F,0xC1,0xFF,0xFC,0x00,0x08,
+  0xF0,0x00,0x7F,0xFC,0x03,0x0F,0xC7,0xC3,0xFC,0x1E,0x0F,0x80,0xFF,0xF8,0x00,0x08,
+  0x30,0x00,0x1F,0xF0,0x03,0x87,0x83,0x0F,0xFC,0x0C,0x07,0x00,0x3F,0xE0,0x00,0x08,
+  0x30,0x00,0x00,0x00,0x00,0x00,0x00,0x0F,0xF8,0x00,0x00,0x00,0x00,0x00,0x00,0x08,
+  0x30,0x00,0x00,0x00,0x00,0x00,0x00,0x1F,0xE0,0x00,0x00,0x00,0x00,0x00,0x00,0x0F,
+  0x30,0x00,0x00,0x00,0x00,0x00,0x00,0x08,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x0F,
+  0x30,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x0F,
+  0x30,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x0F,
+  0xF0,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x0F,
+  0xF0,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x0F,
+  0xF0,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x0F,
+  0xF7,0xFD,0xFF,0x7F,0xDF,0xF7,0xFD,0xFF,0x7F,0xDF,0xF7,0xFD,0xFF,0x7F,0xDF,0xFF,
+  0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,
+  0xFC,0x07,0x03,0xC0,0xF0,0x3C,0x0F,0x03,0xC0,0xF0,0x3C,0x0F,0x03,0xC0,0xF0,0x3F,
+  0xFC,0x07,0x03,0xC0,0xF0,0x3C,0x0F,0x03,0xC0,0xF0,0x3C,0x0F,0x03,0xC0,0xF0,0x3F,
+  0xFC,0x07,0x03,0xC0,0xF0,0x3C,0x0F,0x03,0xC0,0xF0,0x3C,0x0F,0x03,0xC0,0xF0,0x3F,
+  0xFC,0x07,0x03,0xC0,0xF0,0x3C,0x0F,0x03,0xC0,0xF0,0x3C,0x0F,0x03,0xC0,0xF0,0x3F,
+  0xFC,0x07,0x03,0xC0,0xF0,0x3C,0x0F,0x03,0xC0,0xF0,0x3C,0x0F,0x03,0xC0,0xF0,0x3F,
+  0xFC,0x07,0x03,0xC0,0xF0,0x3C,0x0F,0x03,0xC0,0xF0,0x3C,0x0F,0x03,0xC0,0xF0,0x3F,
+  0xFC,0x07,0x03,0xC0,0xF0,0x3C,0x0F,0x03,0xC0,0xF0,0x3C,0x0F,0x03,0xC0,0xF0,0x3F,
+  0xFC,0x07,0x03,0xC0,0xF0,0x3C,0x0F,0x03,0xC0,0xF0,0x3C,0x0F,0x03,0xC0,0xF0,0x3F,
+  0xFC,0x07,0x03,0xC0,0xF0,0x3C,0x0F,0x03,0xC0,0xF0,0x3C,0x0F,0x03,0xC0,0xF0,0x3F,
+  0xFC,0x07,0x03,0xC0,0xF0,0x3C,0x0F,0x03,0xC0,0xF0,0x3C,0x0F,0x03,0xC0,0xF0,0x3F,
+  0xFC,0x07,0x03,0xC0,0xF0,0x3C,0x0F,0x03,0xC0,0xF0,0x3C,0x0F,0x03,0xC0,0xF0,0x3F,
+  0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF
+};
+
+
 HX711 myScale (D15, D16); //pins for scale
 
 const int CALFACTOR = 1025; // changing value changes get_units units (lb , g, ton , etc .)
 const int SAMPLES = 10; // number of data points averaged when using get_units or get_value
 
-
-Encoder myEnc(D8, D9); //pins for encoder
-Button button(D19); //reset button
-Button encButton(D2); //encoder/selection button
+Button button(D19); //reset/selection button
+Button buttonRight(D18); //select menu right
+Button buttonLeft(D17); //select menu left
 const int OLED_RESET=-1;
 Adafruit_SSD1306 display(OLED_RESET); //enable OLED
 const int rotdefault = 0; //default rotation if necessary
@@ -440,17 +507,17 @@ bool MQTT_ping();
 TCPClient TheClient; 
 Adafruit_MQTT_SPARK mqtt(&TheClient,AIO_SERVER,AIO_SERVERPORT,AIO_USERNAME,AIO_KEY); //connection for Adafruit (requires your own Credentials.h)
 
-Adafruit_MQTT_Publish pubFeed = Adafruit_MQTT_Publish(&mqtt, AIO_USERNAME "/feeds/NextIngredient");
-Adafruit_MQTT_Publish pubFeed2 = Adafruit_MQTT_Publish(&mqtt, AIO_USERNAME "/feeds/totalOz");
+Adafruit_MQTT_Publish pubFeed = Adafruit_MQTT_Publish(&mqtt, AIO_USERNAME "/feeds/totalOz");
 
-int drinkDevice;
+int drinkDevice, drinkGame;
 int manhattanC;
 int screwC;
 int classMC;
 int negroniC;
 int essMarC;
+int gameC;
 int position;
-float totalOz;
+float totalOz, pubTotal, pubTotal2, pubTotal3, pubTotal4;
 int onAndOffC; //ints ending in C are counters
 
 int fivSevTim = 5000;
@@ -490,6 +557,8 @@ void setup() {
     classMC = 0;
     negroniC = 0;
     drinkDevice = 0;
+    position = 0;
+    gameC = 0;
     essMarC = 0; //start all counters at 0
     display.clearDisplay();
 }
@@ -500,35 +569,40 @@ void loop() {
     weight = myScale.get_units(SAMPLES) / 28.34952; // return weight in units set by set_scale ();
     switch(drinkDevice){
         case 0:
-        position = myEnc.read() / 5;
         Serial.printf("%i", position);
 
-    if (position >= 5){
+    if (buttonLeft.isPressed()){
+        position++;
+    }
+
+    if (buttonRight.isPressed()){
+        position--;
+    }
+
+    if (position >= 6){
         position = 0;
-        myEnc.write(0);
 }
     if (position < 0){
-      position = 4;
-      myEnc.write(20);
+      position = 5;
 } //allows the user to control the drink selection menu, and resets the values for the encoder to loop the menu
         if (position == 0){
             display.clearDisplay();
             display.drawBitmap(0, 1,  bitmap_screwDriver, 128, 64, WHITE);
             display.display();
-            if (encButton.isPressed()){
+            if (button.isPressed()){
                 myScale.tare (); // set the tare weight (or zero)
-                selection(1);
                 screwC = 1;
+                selection(1);
         }
 }
         if (position == 1){
             display.clearDisplay();
             display.drawBitmap(0, 1,  bitmap_classMarg, 128, 64, WHITE);
             display.display();
-            if (encButton.isPressed()){
+            if (button.isPressed()){
                 myScale.tare (); // set the tare weight (or zero)
-                selection(2);
                 classMC = 1;
+                selection(4);
         }
 
 }
@@ -536,10 +610,10 @@ void loop() {
         display.clearDisplay();
         display.drawBitmap(0, 1,  bitmap_essMartini, 128, 64, WHITE);
         display.display();
-            if (encButton.isPressed()){
+            if (button.isPressed()){
                 myScale.tare (); // set the tare weight (or zero)
-                selection(3);
                 essMarC = 1;
+                selection(8);
         }
 
 }
@@ -547,10 +621,10 @@ void loop() {
         display.clearDisplay();
         display.drawBitmap(0, 1,  bitmap_manhattan, 128, 64, WHITE);
         display.display();
-            if (encButton.isPressed()){
+            if (button.isPressed()){
                 myScale.tare (); // set the tare weight (or zero)
-                selection(4);
                 manhattanC = 1;
+                selection(12);
         }
 
 }
@@ -558,10 +632,20 @@ void loop() {
         display.clearDisplay();
         display.drawBitmap(0, 1,  bitmap_negroni, 128, 64, WHITE);
         display.display();
-            if (encButton.isPressed()){
+            if (button.isPressed()){
                 myScale.tare (); // set the tare weight (or zero)
-                selection(5);
                 negroniC = 1;
+                selection(15);
+        }
+    }
+        if (position == 5){
+            display.clearDisplay();
+            display.drawBitmap(0, 1,  bitmap_GAME, 128, 64, WHITE);
+            display.display();
+            if (button.isPressed()){
+                myScale.tare (); // set the tare weight (or zero)
+                gameC = 1;
+                selection(18);
         }
 
 }
@@ -575,9 +659,9 @@ void loop() {
             currWeight = weight;
         }
             display.clearDisplay();
-            display.printf("ADD 3 OZ OF ORANGE JUICE: \n%0.1f", currWeight);
+            display.printf("ADD 3 OZ OF \n ORANGE JUICE: \n%0.1f", currWeight);
             display.display();
-            if (currWeight >= 3.1){
+            if (currWeight >= 3.0){
                 lasWeight = currWeight;
                 display.clearDisplay();
                 display.printf("STOP");
@@ -586,35 +670,369 @@ void loop() {
                 display.printf("STOP");
                 display.display();
                 myScale.tare();
-                selection(3);
+                pubTotal = currWeight;
+                selection(2);
             }
     }
         break;
 
-        case 3:
+        case 2:
         if (lasWeight != weight){
             currWeight = weight;
         }
             display.setCursor(0,0);
             display.clearDisplay();
-            display.printf("ADD 2 OZ OF VODKA: \n%0.1f", currWeight);
+            display.printf("ADD 2 OZ OF \n VODKA: \n%0.1f", currWeight);
             display.display();
-            if (currWeight >= 2.1){
-                selection(2);
+            if (currWeight >= 2.0){
+                pubTotal2 = currWeight;
+                selection(3);
             }
 
             break;
 
-                case 2:
+                case 3:
                 myScale.tare ();
                 display.clearDisplay();
                 display.printf("done! ENJOY.");
                 display.display();
-                timerOne.startTimer(oneSecTim);
-                if (timerOne.isTimerReady()){
-                    selection(0);
-                }
-                    break;
+                display.clearDisplay();
+                display.printf("done! ENJOY.");
+                display.display();
+                display.clearDisplay();
+                display.printf("done! ENJOY.");
+                display.display();
+                pubFeed.publish(pubTotal + pubTotal2 + pubTotal3 + pubTotal4);
+                pubTotal = 0;
+                pubTotal2 = 0;
+                pubTotal3 = 0;
+                pubTotal4 = 0;
+                selection(0);
+            break;
+    
+    case 4:
+    resetButton();
+    if (classMC == 1){
+        display.setCursor(0,0);
+        if (lasWeight != weight){
+            currWeight = weight;
+        }
+            display.clearDisplay();
+            display.printf("ADD 2 OZ OF \n TEQUILA: \n%0.1f", currWeight);
+            display.display();
+            if (currWeight >= 2.0){
+                lasWeight = currWeight;
+                display.clearDisplay();
+                display.printf("STOP");
+                display.display();
+                display.clearDisplay();
+                display.printf("STOP");
+                display.display();
+                myScale.tare();
+                pubTotal = currWeight;
+                selection(5);
+            }
+    }
+        break;
+
+    case 5:
+    resetButton();
+        display.setCursor(0,0);
+        if (lasWeight != weight){
+            currWeight = weight;
+        }
+            display.clearDisplay();
+            display.printf("ADD 1 OZ OF \n LIME JUICE: \n%0.1f", currWeight);
+            display.display();
+            if (currWeight >= 1.0){
+                lasWeight = currWeight;
+                display.clearDisplay();
+                display.printf("STOP");
+                display.display();
+                display.clearDisplay();
+                display.printf("STOP");
+                display.display();
+                myScale.tare();
+                pubTotal2 = currWeight;
+                selection(6);
+    }
+        break;
+
+    case 6:
+    resetButton();
+        display.setCursor(0,0);
+        if (lasWeight != weight){
+            currWeight = weight;
+        }
+            display.clearDisplay();
+            display.printf("ADD 3/4 OZ OF \n ORANGE LIQUEUR: \n%0.1f", currWeight);
+            display.display();
+            if (currWeight >= 0.75){
+                lasWeight = currWeight;
+                display.clearDisplay();
+                display.printf("STOP");
+                display.display();
+                display.clearDisplay();
+                display.printf("STOP");
+                display.display();
+                myScale.tare();
+                pubTotal3 = currWeight;
+                selection(7);
+    }
+        break;
+
+        case 7:
+        if (lasWeight != weight){
+            currWeight = weight;
+        }
+            display.setCursor(0,0);
+            display.clearDisplay();
+            display.printf("ADD 1/2 OZ OF \n SIMPLE SYRUP: \n%0.1f", currWeight);
+            display.display();
+            if (currWeight >= 0.5){
+                pubTotal4 = currWeight;
+                selection(3);
+            }
+
+            break;
+
+    case 8:
+    resetButton();
+    if (essMarC == 1){
+        display.setCursor(0,0);
+        if (lasWeight != weight){
+            currWeight = weight;
+        }
+            display.clearDisplay();
+            display.printf("ADD 1 OZ OF \n VODKA: \n%0.1f", currWeight);
+            display.display();
+            if (currWeight >= 1.0){
+                lasWeight = currWeight;
+                display.clearDisplay();
+                display.printf("STOP");
+                display.display();
+                display.clearDisplay();
+                display.printf("STOP");
+                display.display();
+                myScale.tare();
+                pubTotal = currWeight;
+                selection(9);
+            }
+    }
+            break;
+
+    case 9:
+    resetButton();
+        display.setCursor(0,0);
+        if (lasWeight != weight){
+            currWeight = weight;
+        }
+            display.clearDisplay();
+            display.printf("ADD 1 OZ OF \n COFFEE LIQUEUR: \n%0.1f", currWeight);
+            display.display();
+            if (currWeight >= 1.0){
+                lasWeight = currWeight;
+                display.clearDisplay();
+                display.printf("STOP");
+                display.display();
+                display.clearDisplay();
+                display.printf("STOP");
+                display.display();
+                myScale.tare();
+                pubTotal2 = currWeight;
+                selection(10);
+    }
+        break;
+
+    case 10:
+    resetButton();
+        display.setCursor(0,0);
+        if (lasWeight != weight){
+            currWeight = weight;
+        }
+            display.clearDisplay();
+            display.printf("ADD 1 OZ OF \n ESPRESSO: \n%0.1f", currWeight);
+            display.display();
+            if (currWeight >= 1.0){
+                lasWeight = currWeight;
+                display.clearDisplay();
+                display.printf("STOP");
+                display.display();
+                display.clearDisplay();
+                display.printf("STOP");
+                display.display();
+                myScale.tare();
+                pubTotal3 = currWeight;
+                selection(11);
+    }
+        break;
+
+    case 11:
+    resetButton();
+        display.setCursor(0,0);
+        if (lasWeight != weight){
+            currWeight = weight;
+        }
+            display.clearDisplay();
+            display.printf("ADD 1/2 OZ OF \n SIMPLE SYRUP: \n%0.1f", currWeight);
+            display.display();
+            if (currWeight >= 0.5){
+                lasWeight = currWeight;
+                display.clearDisplay();
+                display.printf("STOP");
+                display.display();
+                display.clearDisplay();
+                display.printf("STOP");
+                display.display();
+                myScale.tare();
+                pubTotal4 = currWeight;
+                selection(3);
+    }
+        break;
+
+    case 12:
+    resetButton();
+        display.setCursor(0,0);
+        if (lasWeight != weight){
+            currWeight = weight;
+        }
+            display.clearDisplay();
+            display.printf("ADD 3 OZ OF \n whiskey: \n%0.1f", currWeight);
+            display.display();
+            if (currWeight >= 3.0){
+                lasWeight = currWeight;
+                display.clearDisplay();
+                display.printf("STOP");
+                display.display();
+                display.clearDisplay();
+                display.printf("STOP");
+                display.display();
+                myScale.tare();
+                pubTotal = currWeight;
+                selection(13);
+    }
+        break;
+
+    case 13:
+    resetButton();
+        display.setCursor(0,0);
+        if (lasWeight != weight){
+            currWeight = weight;
+        }
+            display.clearDisplay();
+            display.printf("ADD 1/2 OZ OF \n SWEET VERMOUTH: \n%0.1f", currWeight);
+            display.display();
+            if (currWeight >= 0.5){
+                lasWeight = currWeight;
+                display.clearDisplay();
+                display.printf("STOP");
+                display.display();
+                display.clearDisplay();
+                display.printf("STOP");
+                display.display();
+                myScale.tare();
+                pubTotal2 = currWeight;
+                selection(14);
+    }
+        break;
+
+    case 14:
+    resetButton();
+        display.setCursor(0,0);
+        if (lasWeight != weight){
+            currWeight = weight;
+        }
+            display.clearDisplay();
+            display.printf("ADD 1/10 OZ OF \n BITTERS: \n%0.1f", currWeight);
+            display.display();
+            if (currWeight >= 0.1){
+                lasWeight = currWeight;
+                display.clearDisplay();
+                display.printf("STOP");
+                display.display();
+                display.clearDisplay();
+                display.printf("STOP");
+                display.display();
+                myScale.tare();
+                pubTotal3 = currWeight;
+                selection(3);
+    }
+        break;
+
+    case 15:
+    resetButton();
+        display.setCursor(0,0);
+        if (lasWeight != weight){
+            currWeight = weight;
+        }
+            display.clearDisplay();
+            display.printf("ADD 1 OZ OF \n GIN: \n%0.1f", currWeight);
+            display.display();
+            if (currWeight >= 1.0){
+                lasWeight = currWeight;
+                display.clearDisplay();
+                display.printf("STOP");
+                display.display();
+                display.clearDisplay();
+                display.printf("STOP");
+                display.display();
+                myScale.tare();
+                pubTotal = currWeight;
+                selection(16);
+    }
+        break;
+
+    case 16:
+    resetButton();
+        display.setCursor(0,0);
+        if (lasWeight != weight){
+            currWeight = weight;
+        }
+            display.clearDisplay();
+            display.printf("ADD 1 OZ OF \n CAMPARI: \n%0.1f", currWeight);
+            display.display();
+            if (currWeight >= 0.1){
+                lasWeight = currWeight;
+                display.clearDisplay();
+                display.printf("STOP");
+                display.display();
+                display.clearDisplay();
+                display.printf("STOP");
+                display.display();
+                myScale.tare();
+                pubTotal2 = currWeight;
+                selection(17);
+    }
+        break;
+
+    case 17:
+    resetButton();
+        display.setCursor(0,0);
+        if (lasWeight != weight){
+            currWeight = weight;
+        }
+            display.clearDisplay();
+            display.printf("ADD 1 OZ OF \n SWEET VERMOUTH: \n%0.1f", currWeight);
+            display.display();
+            if (currWeight >= 1.0){
+                lasWeight = currWeight;
+                display.clearDisplay();
+                display.printf("STOP");
+                display.display();
+                display.clearDisplay();
+                display.printf("STOP");
+                display.display();
+                myScale.tare();
+                pubTotal3 = currWeight;
+                selection(3);
+    }
+        break;
+
+        switch (drinkGame){
+    display.printf("swag");
+    }
+        break;
+
     }
 }
 void MQTT_connect() {
@@ -662,6 +1080,8 @@ void resetButton(){
         negroniC = 0;
         essMarC = 0;
         onAndOffC = 0;
+        myScale.tare();
         selection(0);
     }
+
 }
